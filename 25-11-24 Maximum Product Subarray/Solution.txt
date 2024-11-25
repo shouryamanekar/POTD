@@ -1,0 +1,30 @@
+class Solution {
+    // Function to find maximum product subarray
+    int maxProduct(int[] arr) {
+        // Initialize variables
+        int maxProduct = arr[0];
+        int currMax = arr[0];
+        int currMin = arr[0];
+
+        // Iterate through the array from the second element
+        for (int i = 1; i < arr.length; i++) {
+            int num = arr[i];
+
+            // If current number is negative, swap currMax and currMin
+            if (num < 0) {
+                int temp = currMax;
+                currMax = currMin;
+                currMin = temp;
+            }
+
+            // Update currMax and currMin
+            currMax = Math.max(num, currMax * num);
+            currMin = Math.min(num, currMin * num);
+
+            // Update the overall max product
+            maxProduct = Math.max(maxProduct, currMax);
+        }
+
+        return maxProduct;
+    }
+}
